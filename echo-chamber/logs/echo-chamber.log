@@ -1,0 +1,32 @@
+[2026-01-28T21:57:18.485Z] ℹ️ [INFO] 🔮 Echo Chamber Web Server Started
+{
+  "url": "http://localhost:3000",
+  "environment": "development"
+}
+[2026-01-28T21:57:23.265Z] ℹ️ [INFO] SIGTERM received - shutting down gracefully
+[2026-01-28T22:00:08.731Z] ℹ️ [INFO] 🔮 Echo Chamber Web Server Started
+{
+  "url": "http://localhost:3000",
+  "environment": "development"
+}
+[2026-01-28T22:00:22.524Z] ℹ️ [INFO] GET /api/metrics
+[2026-01-28T22:00:22.540Z] ℹ️ [INFO] GET /favicon.ico
+[2026-01-28T22:00:22.541Z] ⚠️ [WARN] Route not found: /favicon.ico
+[2026-01-28T22:07:24.290Z] ℹ️ [INFO] POST /api/analyze
+[2026-01-28T22:07:24.292Z] ℹ️ [INFO] Sequence analyzed successfully
+{
+  "pattern": "arithmetic",
+  "length": 4
+}
+[2026-01-28T22:08:18.184Z] ℹ️ [INFO] POST /api/compare
+[2026-01-28T22:08:18.184Z] ℹ️ [INFO] Sequences compared
+{
+  "samePattern": true,
+  "similarity": 50
+}
+[2026-01-28T22:08:43.572Z] ℹ️ [INFO] POST /api/compare
+[2026-01-28T22:08:43.573Z] ℹ️ [INFO] Sequences compared
+{
+  "samePattern": false,
+  "similarity": 0
+}

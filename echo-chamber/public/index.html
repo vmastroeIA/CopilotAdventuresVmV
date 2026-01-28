@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 Echo Chamber - Sequence Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>🔮 ECHO CHAMBER</h1>
+                <p class="subtitle">Mystical Sequence Pattern Analysis</p>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="analyze">Analyze</button>
+                <button class="nav-btn" data-tab="history">History</button>
+                <button class="nav-btn" data-tab="compare">Compare</button>
+                <button class="nav-btn" data-tab="metrics">Metrics</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Analyze Tab -->
+        <section class="tab-content active" id="analyze-tab">
+            <div class="card">
+                <h2>🔍 Analyze a Sequence</h2>
+                <p class="description">Enter a sequence of numbers to discover the hidden pattern</p>
+
+                <div class="input-group">
+                    <label for="sequence-input">Enter your sequence (comma-separated):</label>
+                    <input 
+                        type="text" 
+                        id="sequence-input" 
+                        placeholder="e.g., 3, 6, 9, 12 or 2, 4, 8, 16 or 1, 1, 2, 3, 5, 8"
+                        class="input-field"
+                    >
+                    <div class="input-hints">
+                        <p>💡 Try these:</p>
+                        <button class="hint-btn" onclick="setSequence([3, 6, 9, 12])">Arithmetic: 3, 6, 9, 12</button>
+                        <button class="hint-btn" onclick="setSequence([2, 4, 8, 16])">Geometric: 2, 4, 8, 16</button>
+                        <button class="hint-btn" onclick="setSequence([1, 1, 2, 3, 5, 8])">Fibonacci: 1, 1, 2, 3, 5, 8</button>
+                        <button class="hint-btn" onclick="setSequence([1, 4, 9, 16, 25])">Polynomial: 1, 4, 9, 16, 25</button>
+                    </div>
+                </div>
+
+                <button id="analyze-btn" class="btn btn-primary">Analyze Sequence</button>
+            </div>
+
+            <div id="analysis-results" class="card hidden">
+                <h3>✨ Analysis Results</h3>
+                
+                <div class="results-grid">
+                    <div class="result-item">
+                        <label>Pattern Type</label>
+                        <span id="pattern-type" class="badge"></span>
+                    </div>
+                    <div class="result-item">
+                        <label>Confidence</label>
+                        <span id="confidence" class="badge"></span>
+                    </div>
+                    <div class="result-item">
+                        <label>Analysis Time</label>
+                        <span id="analysis-time" class="badge"></span>
+                    </div>
+                    <div class="result-item">
+                        <label>Sequence Length</label>
+                        <span id="seq-length" class="badge"></span>
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    <h4>📐 Formula</h4>
+                    <code id="formula-text"></code>
+                </div>
+
+                <div class="prediction-box">
+                    <h4>🎯 Predictions (Next 5 Numbers)</h4>
+                    <div id="predictions" class="predictions-grid"></div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="sequenceChart"></canvas>
+                </div>
+
+                <div class="explanation-box">
+                    <h4>📖 Explanation</h4>
+                    <p id="explanation-text"></p>
+                </div>
+            </div>
+
+            <div id="error-message" class="error-box hidden"></div>
+        </section>
+
+        <!-- History Tab -->
+        <section class="tab-content" id="history-tab">
+            <div class="card">
+                <div class="tab-header">
+                    <h2>📚 Analysis History</h2>
+                    <button id="clear-history-btn" class="btn btn-danger">Clear History</button>
+                </div>
+                <div id="history-list" class="history-list"></div>
+            </div>
+        </section>
+
+        <!-- Compare Tab -->
+        <section class="tab-content" id="compare-tab">
+            <div class="card">
+                <h2>⚖️ Compare Sequences</h2>
+                <p class="description">Compare two sequences to find similarities</p>
+
+                <div class="compare-grid">
+                    <div class="compare-input">
+                        <label for="seq1-input">First Sequence:</label>
+                        <input 
+                            type="text" 
+                            id="seq1-input" 
+                            placeholder="e.g., 2, 4, 6, 8"
+                            class="input-field"
+                        >
+                    </div>
+                    <div class="compare-input">
+                        <label for="seq2-input">Second Sequence:</label>
+                        <input 
+                            type="text" 
+                            id="seq2-input" 
+                            placeholder="e.g., 5, 10, 15, 20"
+                            class="input-field"
+                        >
+                    </div>
+                </div>
+
+                <button id="compare-btn" class="btn btn-primary">Compare Sequences</button>
+
+                <div id="compare-results" class="card hidden">
+                    <h3>Comparison Results</h3>
+                    <div class="comparison-box">
+                        <div class="comparison-item">
+                            <h4>Sequence 1</h4>
+                            <p><strong>Pattern:</strong> <span id="comp-pattern1"></span></p>
+                            <p><strong>Confidence:</strong> <span id="comp-confidence1"></span></p>
+                        </div>
+                        <div class="comparison-divider">VS</div>
+                        <div class="comparison-item">
+                            <h4>Sequence 2</h4>
+                            <p><strong>Pattern:</strong> <span id="comp-pattern2"></span></p>
+                            <p><strong>Confidence:</strong> <span id="comp-confidence2"></span></p>
+                        </div>
+                    </div>
+                    <div id="similarity-meter" class="similarity-meter">
+                        <div class="meter-label">Similarity Score</div>
+                        <div class="meter-bar">
+                            <div id="meter-fill" class="meter-fill"></div>
+                        </div>
+                        <div class="meter-value"><span id="similarity-value">0</span>%</div>
+                    </div>
+                    <div id="same-pattern-msg" class="message"></div>
+                </div>
+
+                <div id="compare-error" class="error-box hidden"></div>
+            </div>
+        </section>
+
+        <!-- Metrics Tab -->
+        <section class="tab-content" id="metrics-tab">
+            <div class="card">
+                <h2>📊 Performance Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Total Analyses</div>
+                        <div class="metric-value" id="metric-analyses">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Cache Hits</div>
+                        <div class="metric-value" id="metric-cache">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Avg Analysis Time</div>
+                        <div class="metric-value" id="metric-time">0ms</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Cache Size</div>
+                        <div class="metric-value" id="metric-size">0</div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="refreshMetrics()">Refresh Metrics</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>🔮 Echo Chamber • Mystical Sequence Analysis • v1.0.0</p>
+        <p>Part of the CopilotAdventures Collection</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

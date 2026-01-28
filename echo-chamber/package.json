@@ -1,0 +1,45 @@
+{
+  "name": "echo-chamber-advanced",
+  "version": "2.0.0",
+  "description": "Advanced Echo Chamber - Mystical Sequence Pattern Analysis with Web Interface",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "NODE_ENV=development node src/server.js",
+    "test": "node tests/test-suite.js",
+    "test:watch": "nodemon tests/test-suite.js",
+    "cli": "node src/cli.js",
+    "serve": "node src/server.js"
+  },
+  "keywords": [
+    "arithmetic-progression",
+    "geometric-progression",
+    "polynomial-sequences",
+    "fibonacci",
+    "pattern-recognition",
+    "sequence-analysis",
+    "educational",
+    "javascript",
+    "node.js",
+    "express",
+    "chart.js",
+    "copilot-adventures"
+  ],
+  "author": "GitHub Copilot Adventures",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/CopilotAdventures"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
